@@ -27,14 +27,11 @@
             return {
                 students: [],
                 st: [
-                    {nick: "PiotrekX69"},
+                    {nick: "Piotrek99"},
                     {nick: "n.lorenz"},
                     {nick: "Michalczyk.Adam"},
-                    {nick: "Konop1999"},
-                    {nick: "AsiaZPodlasia"},
-                    {nick: "TwojStary ;)"},
-                    {nick: "Jk"},
-                    {nick: "Jerzyk"},
+                    {nick: "Konrad.1995"},
+                    {nick: "jerzyk.olek"},
                 ]
             }
         },
