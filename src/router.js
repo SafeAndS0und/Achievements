@@ -5,21 +5,68 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '*',
+            redirect: '/'
+        },
+        {
+            path: '/',
+            name: 'home',
+            component: Home,
+            meta: {
+                layout: 'home'
+            },
+            children: [
+                {
+                    path: 'student',
+                    name: 'student',
+                    component: () => import('./views/Student.vue'),
+                    meta: {
+                        layout: 'home'
+                    },
+                }
+            ]
+        },
+
+        {
+            path: '/student/:id',
+            name: 'singleStudent',
+            component: () => import('./views/SingleStudent.vue'),
+        },
+        {
+            path: '/join',
+            name: 'join',
+            component: () => import('./views/Join.vue')
+        },
+        {
+            path: '/teacher',
+            name: 'teacher',
+            component: () => import('./views/teacher/Teacher-Home.vue'),
+            meta: {
+                layout: 'teacher'
+            },
+            children: [
+                {
+                    path: 'login',
+                    name: 'login',
+                    component: () => import('./views/teacher/Login.vue'),
+                    meta: {
+                        layout: 'teacher'
+                    }
+                },
+                {
+                    path: 'join',
+                    name: 't_join',
+                    component: () => import('./views/teacher/Join.vue'),
+                    meta: {
+                        layout: 'teacher'
+                    }
+                }
+            ]
+        }
+
+    ]
 })
