@@ -1,7 +1,7 @@
 <template>
-    <router-link :to="`/student/${student.nick}`">
+    <router-link :to="`/student/${student.username}`">
         <article>
-            <h1>{{student.nick}}</h1>
+            <h1>{{student.username}}</h1>
         </article>
     </router-link>
 </template>

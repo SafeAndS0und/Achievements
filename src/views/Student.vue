@@ -7,10 +7,12 @@
         <transition-group name="list" tag="div" class="students-list">
             <StudentInfo
                     v-for="student in filtered"
-                    :key="student.nick"
+                    :key="student.username"
                     :student="student"
             ></StudentInfo>
         </transition-group>
+
+
     </div>
 </template>
 
@@ -26,22 +28,29 @@
         data(){
             return {
                 students: [],
-                st: [
-                    {nick: "Piotrek99"},
-                    {nick: "n.lorenz"},
-                    {nick: "Michalczyk.Adam"},
-                    {nick: "Konrad.1995"},
-                    {nick: "jerzyk.olek"},
-                ]
+                st: []
             }
         },
         computed: {
             filtered(){
+                let asd = this.api
                 return this.st.filter(item =>{
                     return this.searchValue.length > 0
-                        && item.nick.toLowerCase().includes(this.searchValue.toLowerCase());
+                        && item.username.toLowerCase().includes(this.searchValue.toLowerCase());
                 });
             },
+
+            api(){
+                if(this.searchValue){
+                    return this.axios.get('http://192.168.1.144:3000/students/' + this.searchValue +'/10')
+                        .then(res => {
+                            this.st = res.data.students
+                            console.log('Search Value', this.searchValue)
+                            console.log('api students', res.data.students)
+                            console.log('local students', this.st)
+                        })
+                }
+            }
         },
     }
 </script>
