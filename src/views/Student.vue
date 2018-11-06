@@ -28,12 +28,18 @@
         data(){
             return {
                 students: [],
-                st: []
+                st: [],
+                canIReq: true
             }
         },
         computed: {
             filtered(){
-                let asd = this.api
+
+                if(this.canIReq){
+                    let api = this.api
+                    this.canIReq = false
+                    setTimeout(() => this.canIReq = true, 300)
+                }
                 return this.st.filter(item =>{
                     return this.searchValue.length > 0
                         && item.username.toLowerCase().includes(this.searchValue.toLowerCase());
@@ -42,13 +48,13 @@
 
             api(){
                 if(this.searchValue){
-                    return this.axios.get('http://192.168.1.144:3000/students/' + this.searchValue +'/10')
+                    return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/10')
                         .then(res => {
                             this.st = res.data.students
-                            console.log('Search Value', this.searchValue)
-                            console.log('api students', res.data.students)
-                            console.log('local students', this.st)
                         })
+                        .catch(err => console.log(err))
+
+
                 }
             }
         },
