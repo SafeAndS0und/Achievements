@@ -5,7 +5,7 @@
         <section class="search-area">
 
             <InPut :autofocus="autofocused" @focused="showStudents" @input="searchValue = $event"
-                   placeholder="Znajdź siebie lub znajomego wpisując nick" :width="35" class="search"/>
+                   placeholder="Znajdź siebie lub znajomego wpisując nick" :width="width" class="search"/>
             <div class="links">
                 <router-link to="/join" class="register">Nie masz jeszcze konta?</router-link>
                 <router-link to="/login" class="login">Mam już konto</router-link>
@@ -30,7 +30,9 @@
         },
         data(){
             return {
-                searchValue: ''
+                searchValue: '',
+                document: '',
+                width: 35
             }
         },
         computed: {
@@ -50,7 +52,8 @@
         },
         created(){
             this.fetchData()
-        }
+        },
+
 
     }
 </script>
@@ -83,6 +86,7 @@
         grid-gap: 10px;
 
         .links {
+
             margin: 0 auto;
             width: 32%;
             .register {
@@ -91,10 +95,11 @@
                 text-decoration: none;
                 text-align: center;
                 transition: 100ms;
-                padding:5px;
+                padding: 5px;
                 display: block;
                 margin-top: 10px;
                 margin-bottom: 15px;
+
             }
             .register:hover {
                 color: $darkBlue;
@@ -117,6 +122,8 @@
 
         .search {
             align-self: end;
+            margin: 0 auto;
+            width: 33%;
         }
 
     }
@@ -128,10 +135,22 @@
 
     /* MOBILE */
 
+
+
+    @media only screen and (max-width: $tablet) {
+        .search-area {
+
+            .search {
+                width: 60%;
+            }
+        }
+    }
+
     @media only screen and (max-width: $mobile) {
         .search-area {
-            input {
-                width: 85%;
+
+            .search {
+                width: 90%;
             }
         }
     }

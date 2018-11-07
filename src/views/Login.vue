@@ -1,9 +1,15 @@
 <template>
     <div class="container">
         <div class="form">
-            <InPut placeholder="Nazwa Użytkownika" @input="username = $event" :width="100" :height="30"/>
-            <InPut placeholder="Hasło" @input="password = $event" :width="100" :height="30"/>
+            <h1>Logowanie</h1>
+            <InPut placeholder="Nazwa Użytkownika" class="search" @input="username = $event"  :height="23"/>
+            <InPut placeholder="Hasło" type="password" class="search" @input="password = $event"  :height="23"
+                   @keydown.enter.native="login"/>
             <Icon name="arrow-right" scale="2" @click.native="login" class="arrow"/>
+
+            <transition name="fade">
+                <p class="error" v-if="errorMsg">{{errorMsg}}</p>
+            </transition>
         </div>
     </div>
 </template>
@@ -23,11 +29,24 @@
             return {
                 username: '',
                 password: '',
+                errorMsg: ''
             }
         },
         methods: {
             login(){
-                console.log(this.username, this.password)
+                this.errorMsg = ''
+                this.axios.post('http://localhost:3000/students/login', {
+                    username: this.username,
+                    password: this.password
+                })
+                    .then(res =>{
+                        if(res.data.logged){
+                            this.$router.push('/')
+                        }
+                    })
+                    .catch(err =>{
+                        this.errorMsg = err.response.data.msg
+                    })
             }
         }
     }
@@ -47,7 +66,20 @@
             justify-self: center;
             width: 30%;
 
-            .arrow{
+            h1 {
+                font-weight: lighter;
+                padding: 20px;
+                text-align: center;
+                font-size: 27px;
+                letter-spacing: 4px;
+                color: #000000;
+            }
+
+            .search{
+                width: 100%;
+            }
+
+            .arrow {
                 color: #a1a1a1;
                 display: block;
                 padding: 15px 15px;
@@ -56,10 +88,34 @@
                 cursor: pointer;
             }
 
-            .arrow:hover{
+            .arrow:hover {
                 color: $mainBlue;
+            }
+
+            .error {
+                margin-top: 6px;
+                text-align: center;
+                font-size: 15px;
+                color: #810702;
             }
         }
     }
 
+
+    @media only screen and (max-width: $mobile) {
+        .container{
+            .form{
+                width: 90%;
+            }
+        }
+
+    }
+
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
 </style>

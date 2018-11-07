@@ -1,7 +1,7 @@
 <template>
     <div>
         <input :type="type" :autofocus="autofocus" @focus="$emit('focused')" @input="emit" v-model="val"
-               :placeholder="placeholder"  :style="{width: width + '%', height: height + 'px'}">
+               :placeholder="placeholder" :style="{height: height + 'px'}">
     </div>
 </template>
 
@@ -35,7 +35,7 @@
                 default: 28
             }
         },
-        methods:{
+        methods: {
             emit(event){
                 this.$emit('input', this.val)
             }
@@ -54,6 +54,7 @@
         margin-right: auto;
         margin-bottom: 5px;
         height: 28px;
+        width: 90%;
         padding: 12px;
         background-color: rgb(242, 236, 247);
         color: #636c6d;
@@ -61,19 +62,26 @@
         transition: 150ms;
     }
 
-    input::placeholder{
+    input::placeholder {
         color: #a4a6a7;
         font-size: 17px;
     }
 
-    input:focus{
+    input:focus {
         outline: none;
         background-color: $lightBlue;
-        color:white;
+        color: white;
     }
 
-    input:focus::placeholder{
+    input:focus::placeholder {
         font-size: 0;
     }
 
+    @media only screen and (max-width: $mobile) {
+
+        input::placeholder {
+            font-size: 15px;
+        }
+
+    }
 </style>

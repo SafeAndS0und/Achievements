@@ -11,7 +11,7 @@
 
             <section>
                 <h3>Hasło</h3>
-                <InPut :width="80" :height="14" type="password"  @input="student.password = $event"/>
+                <InPut :width="80" :height="14" type="password" @input="student.password = $event"/>
             </section>
 
 
@@ -35,7 +35,11 @@
 
             <section>
                 <p>Wszystkie dane, oprócz nicku, możesz zedytować później w ustawieniach swojego profilu :) </p>
-                <Button text="Dołącz" :width="100" :height="45" :font-size="22" style="margin-top: 20px" @click.native="register"/>
+                <transition name="fade">
+                    <p class="error" v-html="errorMsg" v-if="errorMsg"></p>
+                </transition>
+                <Button text="Dołącz" :width="100" :height="45" :font-size="22" style="margin-top: 20px"
+                        @click.native="register"/>
             </section>
         </div>
     </div>
@@ -59,7 +63,8 @@
                     surname: '',
                     password: '',
                     public: true
-                }
+                },
+                errorMsg: ''
             }
         },
         methods: {
@@ -73,7 +78,7 @@
                 }
             },
             register(){
-                console.log('registered', this.student)
+                this.errorMsg = ''
                 return this.axios.post('http://localhost:3000/students/register', {
                     username: this.student.username,
                     password: this.student.password,
@@ -81,8 +86,12 @@
                     surname: this.student.surname,
                     public: this.student.public
                 })
-                    .then(res => console.log(res))
-                    .catch(err => console.log(err.response))
+                    .then(res =>{
+
+                    })
+                    .catch(err =>{
+                        err.response.data.validationErrors.forEach((err, index) => this.errorMsg += index + 1 + '. ' + err + '<br/>')
+                    })
 
             }
         }
@@ -92,8 +101,6 @@
 <style scoped lang="scss">
 
     @import '../assets/css/variables.scss';
-
-
 
     .form-container {
         width: 100%;
@@ -137,11 +144,11 @@
                 transition: 100ms;
             }
 
-            .choice:nth-child(2){
+            .choice:nth-child(2) {
                 border-bottom-left-radius: 40px;
                 border-top-left-radius: 40px;
             }
-            .choice:last-child{
+            .choice:last-child {
                 border-bottom-right-radius: 40px;
                 border-top-right-radius: 40px;
             }
@@ -174,21 +181,46 @@
             section {
                 grid-column: 2/12;
 
-                .choice{
+                .choice {
                     width: 90%;
                 }
 
+                .choice:nth-child(2) {
+                    border-bottom-left-radius: 0;
+                    border-top-left-radius: 0;
+                }
+                .choice:last-child {
+                    border-bottom-right-radius: 0;
+                    border-top-right-radius: 0;
+                }
+
                 .join-button {
-                    margin-top:50px;
+                    margin-top: 50px;
                 }
             }
         }
 
-        .arrow{
+        .arrow {
             padding: 15px;
             opacity: 0.8;
         }
 
+    }
+
+    .error {
+        margin-top: 8px;
+        text-align: center;
+        font-size: 15px;
+        color: #810702;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
     }
 
 </style>

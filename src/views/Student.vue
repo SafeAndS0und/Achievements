@@ -48,7 +48,7 @@
 
             api(){
                 if(this.searchValue){
-                    return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/10')
+                    return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/6')
                         .then(res => {
                             this.st = res.data.students
                         })

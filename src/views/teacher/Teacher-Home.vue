@@ -36,7 +36,7 @@
     .teacher-home-container {
         display: grid;
         height: 100vh;
-        width: 100vw;
+        width: 100%;
 
         section {
             margin: auto;
@@ -101,8 +101,33 @@
     @media only screen and (max-width: 768px) {
         .teacher-home-container {
             section {
-                width: 80%;
+                grid-template-columns: 1fr;
+                width: 100%;
+
+
+                .border{
+                    display: none;
+                }
+
+                .link-container:hover{
+                    background-color: transparent;
+                }
+
+                .link-container:hover > a{
+                    color: $darkBlue;
+                }
+
+                .login{
+                    transform: translateX(0);
+                }
+
+                .join{
+                    transform: translateY(0);
+                }
             }
+
+
+
         }
     }
 

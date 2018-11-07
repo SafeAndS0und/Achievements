@@ -99,5 +99,28 @@
 
     }
 
+    @media only screen and (max-width: $mobile) {
+        nav{
+
+            .navbar{
+
+                .navbar-link{
+                    padding: 0 5px;
+                    font-size: 14px;
+                }
+                .navbar-link:nth-child(1) {
+                    grid-column: 3/7;
+                    position: absolute;
+                    right: 0;
+                }
+                .navbar-link:nth-child(2) {
+                    grid-column: 7/9;
+                }
+                .navbar-link:nth-child(3) {
+                    grid-column: 10/12;
+                }
+            }
+        }
+    }
 
 </style>
