@@ -42,6 +42,11 @@ export default new Router({
             component: () => import('./views/Join.vue')
         },
         {
+          path: '/login',
+          name: 'login',
+          component: () => import('./views/Login.vue')
+        },
+        {
             path: '/teacher',
             name: 'teacher',
             component: () => import('./views/teacher/Teacher-Home.vue'),
@@ -51,7 +56,7 @@ export default new Router({
             children: [
                 {
                     path: 'login',
-                    name: 'login',
+                    name: 't_login',
                     component: () => import('./views/teacher/Login.vue'),
                     meta: {
                         layout: 'teacher'

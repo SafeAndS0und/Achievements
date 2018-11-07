@@ -5,7 +5,7 @@
         <nav>
 
             <div @click="$router.go(-1)">
-                <Icon name="arrow-left" scale="1.8" class="arrow"></Icon>
+                <Icon name="arrow-left" scale="1.3" class="arrow"></Icon>
             </div>
 
             <section class="navbar">
@@ -61,7 +61,7 @@
             position: fixed;
             top: 0;
             right: 0;
-            height: 79px;
+            height: 70px;
             width: 100%;
             z-index: 4;
             background-color: #ffffff;
@@ -73,8 +73,8 @@
                 color: $mainBlue;
                 display: inline-block;
                 padding: 0 20px;
-                height: 79px;
-                line-height: 79px;
+                height: 70px;
+                line-height: 70px;
                 text-decoration: none;
                 grid-column: 4/13;
                 transition: 250ms;

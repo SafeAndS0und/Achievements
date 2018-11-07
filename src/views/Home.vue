@@ -1,15 +1,21 @@
 <template>
     <div>
         <router-link to="/teacher" class="teacher">Nauczyciel?</router-link>
+
         <section class="search-area">
+
             <InPut :autofocus="autofocused" @focused="showStudents" @input="searchValue = $event"
                    placeholder="Znajdź siebie lub znajomego wpisując nick" :width="35" class="search"/>
-            <router-link to="/join" class="register">Nie masz jeszcze konta?</router-link>
+            <div class="links">
+                <router-link to="/join" class="register">Nie masz jeszcze konta?</router-link>
+                <router-link to="/login" class="login">Mam już konto</router-link>
+            </div>
         </section>
 
         <section class="result-area">
             <router-view :searchValue="searchValue"/>
         </section>
+
     </div>
 </template>
 
@@ -20,7 +26,7 @@
     export default {
         name: "Home",
         components: {
-          InPut
+            InPut
         },
         data(){
             return {
@@ -53,7 +59,7 @@
 
     @import '../assets/css/variables.scss';
 
-    .teacher{
+    .teacher {
         position: fixed;
         top: 0;
         right: 0;
@@ -62,7 +68,8 @@
         transition: 200ms;
         text-decoration: none;
     }
-    .teacher:hover{
+
+    .teacher:hover {
         background-color: $lightBlue;
         color: #ffffff;
         cursor: pointer;
@@ -70,34 +77,54 @@
 
     .search-area {
         width: 100%;
-        height: 300px;
+        height: 340px;
         display: grid;
         grid-template-rows: 2fr 0.5fr;
         grid-gap: 10px;
 
-        .register{
-            margin-left: auto;
-            margin-right: auto;
-            height: auto;
-            color: #5a575a;
-            text-decoration: none;
-            transition: 100ms;
-            padding: 3px;
-        }
-        .register:hover{
-            color: $darkBlue;
+        .links {
+            margin: 0 auto;
+            width: 32%;
+            .register {
+                height: auto;
+                color: #5a575a;
+                text-decoration: none;
+                text-align: center;
+                transition: 100ms;
+                padding:5px;
+                display: block;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+            .register:hover {
+                color: $darkBlue;
+            }
+
+            .login {
+                text-align: center;
+                display: block;
+                height: auto;
+                color: #5a575a;
+                text-decoration: none;
+                transition: 100ms;
+                padding: 5px;
+
+            }
+            .login:hover {
+                color: $darkBlue;
+            }
         }
 
-        .search{
+        .search {
             align-self: end;
         }
 
     }
+
     .result-area {
         width: 100%;
         height: auto;
     }
-
 
     /* MOBILE */
 

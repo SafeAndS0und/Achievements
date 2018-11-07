@@ -6,23 +6,23 @@
 
             <section>
                 <h3>Nick - będzie służył do zalogowania, oraz do wyszukiwania Cię na stronie</h3>
-                <InPut :width="80" :height="14"/>
+                <InPut :width="80" :height="14" @input="student.username = $event"/>
             </section>
 
             <section>
                 <h3>Hasło</h3>
-                <InPut :width="80" :height="14" type="password"/>
+                <InPut :width="80" :height="14" type="password"  @input="student.password = $event"/>
             </section>
 
 
             <section>
                 <h3>Imie (opcjonalne)</h3>
-                <InPut :width="80" :height="14"/>
+                <InPut :width="80" :height="14" @input="student.name = $event"/>
             </section>
 
             <section>
                 <h3>Nazwisko (opcjonalne)</h3>
-                <InPut :width="80" :height="14"/>
+                <InPut :width="80" :height="14" @input="student.surname = $event"/>
             </section>
 
 
@@ -35,7 +35,7 @@
 
             <section>
                 <p>Wszystkie dane, oprócz nicku, możesz zedytować później w ustawieniach swojego profilu :) </p>
-                <Button text="Dołącz" :width="100" :height="45" :font-size="22" style="margin-top: 20px"/>
+                <Button text="Dołącz" :width="100" :height="45" :font-size="22" style="margin-top: 20px" @click.native="register"/>
             </section>
         </div>
     </div>
@@ -52,7 +52,14 @@
         data(){
             return {
                 priv: false,
-                pub: false
+                pub: false,
+                student: {
+                    username: '',
+                    name: '',
+                    surname: '',
+                    password: '',
+                    public: true
+                }
             }
         },
         methods: {
@@ -64,6 +71,19 @@
                     this.priv = false
                     this.pub = true
                 }
+            },
+            register(){
+                console.log('registered', this.student)
+                return this.axios.post('http://localhost:3000/students/register', {
+                    username: this.student.username,
+                    password: this.student.password,
+                    name: this.student.name,
+                    surname: this.student.surname,
+                    public: this.student.public
+                })
+                    .then(res => console.log(res))
+                    .catch(err => console.log(err.response))
+
             }
         }
     }
