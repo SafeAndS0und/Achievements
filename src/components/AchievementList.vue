@@ -2,11 +2,11 @@
     <section>
 
         <div class="header">
-            <h1 @click="toggleContent">
+            <h1>
                 {{subject}}
-                <Icon :name="arrowName" scale="1.8" class="arrow"/>
             </h1>
             <p class="teacher">{{teacher}}</p>
+            <Icon :name="arrowName" scale="1.8" class="arrow" @click.native="toggleContent"/>
         </div>
 
         <div v-for="achiv of achivList" v-if="showList">
@@ -48,12 +48,9 @@
 </script>
 
 <style scoped lang="scss">
+    @import '../assets/css/variables.scss';
 
     section {
-        display: grid;
-        grid-gap: 15px;
-        grid-template-rows: minmax(45px, 140px);
-
         .header {
             width: 100%;
 
@@ -61,25 +58,33 @@
                 font-weight: normal;
                 text-align: center;
                 box-sizing: border-box;
-                cursor: pointer;
-                transform: translateX(20px);
+                width: 100%;
+                color: black;
+                margin-bottom: 10px;
+            }
 
-                .arrow {
-                    transform: translateY(16px);
-                    padding: 12px 20px;
-                    transition: 200ms;
-                }
-                .arrow:hover {
-                    background-color: #148fff;
-                    color: white;
-                }
+            .arrow {
+                cursor: pointer;
+                display: block;
+                margin: 10px auto 20px auto;
+                padding: 10px 20px;
+                transition: 200ms;
+                color: $mainBlue;
+                border-radius: 3px;
+                background-color: transparent;
+            }
+            .arrow:hover {
+                padding: 10px 30px;
+                background-color: $mainBlue;
+                color:white;
+                border-radius: 7px;
+
             }
 
             .teacher {
                 font-size: 15px;
                 color: #727272;
                 text-align: center;
-                margin-bottom: 25px;
             }
         }
         div {

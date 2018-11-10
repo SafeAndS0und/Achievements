@@ -1,19 +1,48 @@
 <template>
     <div>
-        <AchievementList :achivList="achievements" subject="Programowanie" teacher="Adam Fulara" class="list" />
-        <AchievementList :achivList="achievements" subject="Bazy Danych" teacher="Grzegorz Szałkowski" class="list" />
-        <AchievementList :achivList="achievements" subject="Biologia" teacher="Piotr Stempin" class="list" />
+        <section class="hero">
+
+            <h1>{{$route.params.id}}</h1>
+
+            <p class="description">
+                Hej, Jestem paweł i zdaje rozszerzony polski, czego bardzo żałuję.
+                Pani na matmie myśli, że mam 30IQ.
+                Interesuję się ...
+            </p>
+
+            <div class="social-container">
+                <Icon name="brands/facebook-f" scale="2.6" class="social"/>
+                <Icon name="brands/instagram" scale="2.6" class="social"/>
+                <Icon name="brands/steam" scale="2.6" class="social"/>
+            </div>
+
+            <div class="info-container">
+                <p class="info-item">pawel.czaszka@gmail.com</p>
+                <p class="info-item">576521953</p>
+                <p class="info-item">Ostrzeszów</p>
+            </div>
+
+        </section>
+
+        <section class="achievements">
+            <AchievementList :achivList="achievements" subject="Programowanie" teacher="Adam Fulara" class="list"/>
+            <AchievementList :achivList="achievements" subject="Bazy Danych" teacher="Grzegorz Szałkowski"
+                             class="list"/>
+            <AchievementList :achivList="achievements" subject="Biologia" teacher="Piotr Stempin" class="list"/>
+        </section>
 
     </div>
 </template>
 
 <script>
     import AchievementList from '../components/AchievementList.vue'
+    import Icon from 'vue-awesome/components/Icon'
 
     export default {
         name: "SingleStudent",
         components: {
-            AchievementList
+            AchievementList,
+            Icon
         },
         data(){
             return {
@@ -50,16 +79,79 @@
 </script>
 
 <style scoped lang="scss">
+    @import '../assets/css/variables.scss';
 
-    div{
+    .hero {
+        margin-top: 140px;
+        height: 250px;
+        width: 100%;
+        background-image: linear-gradient(to right, #0a5ab1, #0c62bf, #0e69ce, #1171dc, #1379eb);
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+
+        h1 {
+            grid-column: span 12;
+            text-align: center;
+            color: white;
+            font-size: 48px;
+            padding-bottom: 15px;
+        }
+
+        .description {
+            grid-column: 1/5;
+            padding: 0 30px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .social-container{
+            grid-column: 6/10;
+
+            .social{
+                transform: translateY(-20px) translateX(-60px);
+                display: inline-block;
+                color: white;
+                padding: 25px 45px;
+                cursor: pointer;
+                transition: 300ms;
+            }
+            .social:first-child:hover{
+                background-color: white;
+                color: $mainBlue;
+            }
+            .social:nth-child(2):hover{
+                background-color: white;
+                color: #ec3366;
+            }
+            .social:last-child:hover{
+                background-color: white;
+                color: #042952;
+            }
+        }
+
+        .info-container{
+
+            grid-column: 10/13;
+
+            .info-item{
+                color: #ffffff;
+                font-size: 16px;
+                padding: 6px;
+            }
+        }
+
+    }
+
+    .achievements {
         margin-top: 110px;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
+        .list {
+            padding: 10px 10px;
+            grid-column: span 4;
+            margin-bottom: 50px;
+        }
     }
 
-    .list{
-        padding: 10px 20px;
-        grid-column: span 4;
-        margin-bottom: 50px;
-    }
+
 </style>

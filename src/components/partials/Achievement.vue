@@ -10,10 +10,9 @@
             <div class="content" v-if="showContent">
                 <p class="desc">{{achievementData.description}}</p>
 
-                <div class="mark">
-                    <span :style="{backgroundColor: currentColor}"
-                          v-if="achievementData.mark">{{achievementData.mark}}</span>
-                    <p v-else style="color: #535053">Do zaliczenia</p>
+                <div class="mark" :style="{backgroundColor: currentColor}">
+                    <span v-if="achievementData.mark">{{achievementData.mark}}</span>
+                    <p v-else>Do zaliczenia</p>
                 </div>
 
                 <div class="comment" v-if="achievementData.comment">
@@ -41,7 +40,7 @@
         },
         data(){
             return {
-                colors: ['#2c2c2c', '#9C222D', '#E09A35', '#43ba21'],
+                colors: ['#e8e8e8', '#9C222D', '#E09A35', '#43ba21'],
                 arrowName: 'angle-down',
                 showContent: false
             }
@@ -64,7 +63,7 @@
 <style scoped lang="scss">
     @import '../../assets/css/variables.scss';
 
-    $grey: #2f2f2f;
+    $grey: #f2f2f2;
     $red: #9C222D;
     $yellow: #E09A35;
     $green: #43ba21;
@@ -75,75 +74,78 @@
     $d_green: #5dba2f;
 
     article {
-        width: 90%;
+        width: 85%;
         box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        background-color: white;
-        padding-bottom: 20px;
+        margin-bottom: 15px;
 
         h1 {
             text-align: center;
-            font-weight: normal;
-            font-size: 23px;
+            font-weight: lighter;
+            font-size: 21px;
             grid-column: span 12;
-            padding: 11px 0;
-            margin-bottom: 10px;
-            color: white;
-            background-color: $d_grey;
+            color: #303030;
+
             cursor: pointer;
             transition: 200ms;
+            padding: 12px 0;
+            max-height: 30px;
+
 
             .arrow {
                 padding-left: 15px;
                 transform: translateY(7px);
-                transition: 150ms;
-            }
-            .arrow:hover{
-                color: $lightBlue;
             }
         }
 
         h1:hover{
-            background-color: $grey;
+            background-color: $mainBlue;
+            color: white;
         }
         .content {
+            margin-top: 15px;
             grid-column: 1/13;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
 
+
             .desc {
-                padding: 17px;
+                padding: 30px 15px;
                 grid-column: 1 / span 7;
-                color: #151515;
-                font-size: 17px;
+                color: #3d3d3d;
+                font-size: 16px;
+
             }
 
             .mark {
-                margin-top: 15px;
                 grid-column: 8/13;
-                text-align: center;
-                align-self: center;
+                height: 100%;
+                color: white;
+                display: grid;
 
-                span {
-                    padding: 20px 35px;
-                    background-color: grey;
+                span{
+                    align-self: center;
+                    justify-self: center;
                     font-size: 35px;
                     color: white;
-                    border-radius: 50%;
+                }
+                p{
+                    align-self: center;
+                    justify-self: center;
+                    font-size: 15px;
+                    color: #3c3c3c;
                 }
             }
 
             .comment {
-                margin-top: 15px;
-                padding: 5px;
-                grid-column: 8 / 13;
+                padding: 15px;
+                grid-column: 1 / 13;
 
                 .comment-content {
-                    padding: 3px;
                     line-break: anywhere;
-                    color: #434343;
-                    font-size: 15px;
+                    color: #606060;
+                    font-size: 14px;
                 }
             }
         }
