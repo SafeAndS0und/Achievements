@@ -4,17 +4,19 @@
 
             <h1>{{$route.params.id}}</h1>
 
+            <div class="social-container">
+                <Icon name="brands/facebook-f" scale="2.6" class="social"/>
+                <Icon name="brands/instagram" scale="2.6" class="social"/>
+                <Icon name="brands/steam" scale="2.6" class="social"/>
+            </div>
+
             <p class="description">
                 Hej, Jestem paweł i zdaje rozszerzony polski, czego bardzo żałuję.
                 Pani na matmie myśli, że mam 30IQ.
                 Interesuję się ...
             </p>
 
-            <div class="social-container">
-                <Icon name="brands/facebook-f" scale="2.6" class="social"/>
-                <Icon name="brands/instagram" scale="2.6" class="social"/>
-                <Icon name="brands/steam" scale="2.6" class="social"/>
-            </div>
+
 
             <div class="info-container">
                 <p class="info-item">pawel.czaszka@gmail.com</p>
@@ -83,7 +85,7 @@
 
     .hero {
         margin-top: 140px;
-        height: 250px;
+        height: 280px;
         width: 100%;
         background-image: linear-gradient(to right, #0a5ab1, #0c62bf, #0e69ce, #1171dc, #1379eb);
         display: grid;
@@ -94,21 +96,14 @@
             text-align: center;
             color: white;
             font-size: 48px;
-            padding-bottom: 15px;
-        }
-
-        .description {
-            grid-column: 1/5;
-            padding: 0 30px;
-            color: white;
-            font-size: 18px;
+            height: 40px;
         }
 
         .social-container{
-            grid-column: 6/10;
+            grid-column: 1/5;
+            margin: 0 auto;
 
             .social{
-                transform: translateY(-20px) translateX(-60px);
                 display: inline-block;
                 color: white;
                 padding: 25px 45px;
@@ -128,6 +123,15 @@
                 color: #042952;
             }
         }
+
+        .description {
+            grid-column: 5/9;
+            padding: 15px 30px;
+            color: white;
+            font-size: 18px;
+
+        }
+
 
         .info-container{
 
