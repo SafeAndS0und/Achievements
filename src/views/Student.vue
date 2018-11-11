@@ -1,7 +1,9 @@
 <template>
     <div class="student-container">
         <transition name="fade">
-            <p v-show="filtered.length > 0" class="resultsCounter">Wyników: {{filtered.length}}</p>
+            <p v-show="filtered.length > 0 && filtered.length !==12" class="resultsCounter">Wyników: {{filtered.length}}</p>
+            <p v-show="filtered.length >= 12" class="resultsCounter">Wyników: Za dużo! Bądź dokładniejszy</p>
+
         </transition>
 
         <transition-group name="list" tag="div" class="students-list">
@@ -48,9 +50,10 @@
 
             api(){
                 if(this.searchValue){
-                    return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/6')
+                    return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/12')
                         .then(res => {
                             this.st = res.data.students
+                            console.log(res)
                         })
                         .catch(err => console.log(err))
 

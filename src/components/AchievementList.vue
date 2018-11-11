@@ -61,6 +61,7 @@
                 width: 100%;
                 color: black;
                 margin-bottom: 10px;
+                font-size: 28px;
             }
 
             .arrow {

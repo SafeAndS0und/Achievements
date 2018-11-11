@@ -26,6 +26,8 @@
 
         </section>
 
+
+        <h1 class="achievements-title">Przedmioty i osiągniecia</h1>
         <section class="achievements">
             <AchievementList :achivList="achievements" subject="Programowanie" teacher="Adam Fulara" class="list"/>
             <AchievementList :achivList="achievements" subject="Bazy Danych" teacher="Grzegorz Szałkowski"
@@ -94,9 +96,10 @@
         h1 {
             grid-column: span 12;
             text-align: center;
+            margin-top: 15px;
             color: white;
             font-size: 48px;
-            height: 40px;
+            height: 30px;
         }
 
         .social-container{
@@ -112,7 +115,7 @@
             }
             .social:first-child:hover{
                 background-color: white;
-                color: $mainBlue;
+                color: $darkBlue;
             }
             .social:nth-child(2):hover{
                 background-color: white;
@@ -120,7 +123,7 @@
             }
             .social:last-child:hover{
                 background-color: white;
-                color: #042952;
+                color: #042e63;
             }
         }
 
@@ -146,8 +149,17 @@
 
     }
 
+    .achievements-title{
+        text-align: center;
+        font-size: 36px;
+        font-weight: lighter;
+        letter-spacing: 4px;
+        margin-top: 80px;
+
+    }
+
     .achievements {
-        margin-top: 110px;
+        margin-top: 40px;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         .list {

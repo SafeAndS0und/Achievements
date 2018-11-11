@@ -68,6 +68,7 @@
             border-bottom: 1px solid #f4f4f4;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.14);
 
             .navbar-link {
                 color: $mainBlue;

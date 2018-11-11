@@ -2,7 +2,6 @@
     <article>
 
         <h1 @click="toggleContent">{{achievementData.name}}
-            <Icon :name="arrowName" scale="1.8" class="arrow"/>
         </h1>
 
 
@@ -92,11 +91,6 @@
             padding: 12px 0;
             max-height: 30px;
 
-
-            .arrow {
-                padding-left: 15px;
-                transform: translateY(7px);
-            }
         }
 
         h1:hover{
