@@ -10,7 +10,13 @@ export default new Router({
     routes: [
         {
             path: '*',
-            redirect: '/'
+            redirect: '/error'
+        },
+
+        {
+          path: '/error',
+          name: 'error',
+          component: () => import('./views/Error.vue')
         },
         {
             path: '/',
@@ -35,6 +41,11 @@ export default new Router({
             path: '/student/:id',
             name: 'singleStudent',
             component: () => import('./views/SingleStudent.vue'),
+        },
+        {
+          path: '/student/:id/edit',
+          name: 'edit',
+          component: () => import('./views/Edit.vue')
         },
         {
             path: '/join',

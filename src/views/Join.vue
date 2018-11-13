@@ -10,6 +10,11 @@
             </section>
 
             <section>
+                <h3>Email - będzie potrzebny w awaryjnych sytuacjach, jak zapomnienie hasła</h3>
+                <InPut :width="80" :height="14" @input="student.email = $event"/>
+            </section>
+
+            <section>
                 <h3>Hasło</h3>
                 <InPut :width="80" :height="14" type="password" @input="student.password = $event"/>
             </section>
@@ -59,6 +64,7 @@
                 pub: false,
                 student: {
                     username: '',
+                    email: '',
                     name: '',
                     surname: '',
                     password: '',
@@ -81,13 +87,14 @@
                 this.errorMsg = ''
                 return this.axios.post('http://localhost:3000/students/register', {
                     username: this.student.username,
+                    email: this.student.email,
                     password: this.student.password,
                     name: this.student.name,
                     surname: this.student.surname,
                     public: this.student.public
                 })
                     .then(res =>{
-
+                        this.$router.push(`/student/${this.student.username}`)
                     })
                     .catch(err =>{
                         err.response.data.validationErrors.forEach((err, index) => this.errorMsg += index + 1 + '. ' + err + '<br/>')

@@ -1,7 +1,7 @@
 <template>
     <div>
         <input :type="type" :autofocus="autofocus" @focus="$emit('focused')" @input="emit" v-model="val"
-               :placeholder="placeholder" :style="{height: height + 'px'}">
+               :placeholder="placeholder" :style="{height: height + 'px'}"/>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
         name: "InPut",
         data(){
             return {
-                val: ''
+                val: this.value
             }
         },
         props: {
@@ -33,10 +33,11 @@
             height: {
                 type: Number,
                 default: 28
-            }
+            },
         },
+        prop: ['value'],
         methods: {
-            emit(event){
+            emit(val){
                 this.$emit('input', this.val)
             }
         }

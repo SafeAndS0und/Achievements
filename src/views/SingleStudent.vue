@@ -1,27 +1,26 @@
 <template>
     <div>
         <section class="hero">
+            <Icon name="edit" scale="2" class="edit" @click.native="$router.push(`/student/${student.username}/edit`)"/>
 
-            <h1>{{$route.params.id}}</h1>
+            <div class="header">
+                <h1>{{student.username}}</h1>
+                <h3>{{student.name}} {{student.surname}}</h3>
+            </div>
+
+            <p class="description">
+                {{student.description}}
+            </p>
 
             <div class="social-container">
-                <Icon name="brands/facebook-f" scale="2.6" class="social"/>
+                <Icon name="brands/facebook-f" @click.native="$router.push(`${student.facebook}`)" scale="2.6" class="social"/>
                 <Icon name="brands/instagram" scale="2.6" class="social"/>
                 <Icon name="brands/steam" scale="2.6" class="social"/>
             </div>
 
-            <p class="description">
-                Hej, Jestem paweł i zdaje rozszerzony polski, czego bardzo żałuję.
-                Pani na matmie myśli, że mam 30IQ.
-                Interesuję się ...
-            </p>
-
-
-
             <div class="info-container">
-                <p class="info-item">pawel.czaszka@gmail.com</p>
-                <p class="info-item">576521953</p>
-                <p class="info-item">Ostrzeszów</p>
+                <p class="info-item">{{student.phone}}</p>
+                <p class="info-item">{{student.contactEmail}}</p>
             </div>
 
         </section>
@@ -76,8 +75,21 @@
                         comment: 'DO POPRAWY! Ostateczny termin zdania: 18.11',
                         status: 1
                     }
-                ]
+                ],
+                student: {}
+
             }
+        },
+        created(){
+            this.axios.get('http://localhost:3000/profiles/' + this.$route.params.id)
+                .then(res => {
+                    this.student = res.data[0].student
+                    this.student.description = res.data[0].description
+                    this.student.phone = res.data[0].phone
+                    this.student.contactEmail = res.data[0].contactEmail
+                    this.student.facebook = res.data[0].facebook
+                })
+                .catch(err => console.log(err.response))
         }
     }
 </script>
@@ -92,19 +104,54 @@
         background-image: linear-gradient(to right, #0a5ab1, #0c62bf, #0e69ce, #1171dc, #1379eb);
         display: grid;
         grid-template-columns: repeat(12, 1fr);
+        position: relative;
 
-        h1 {
-            grid-column: span 12;
-            text-align: center;
-            margin-top: 15px;
+        .edit{
+            position: absolute;
+            top: 0;
+            right: 0;
             color: white;
-            font-size: 48px;
-            height: 30px;
+            padding: 15px 15px 15px 20px;
+            transition: 200ms;
+            cursor: pointer;
+        }
+        .edit:hover{
+            background-color: white;
+            color: $mainBlue;
+        }
+
+        .header{
+            grid-column: 5/9;
+            grid-row: 1/3;
+            margin-top: 5px;
+
+            h1 {
+                text-align: center;
+                color: white;
+                font-size: 48px;
+            }
+
+            h3{
+                text-align: center;
+                color: white;
+                font-size: 22px;
+            }
+        }
+
+        .description {
+            grid-row: 1/3;
+            grid-column: 1/5;
+            padding: 100px 50px;
+            color: white;
+            font-size: 18px;
+
         }
 
         .social-container{
-            grid-column: 1/5;
+            grid-column: 5/9;
+            grid-row: 2/3;
             margin: 0 auto;
+            align-self: center;
 
             .social{
                 display: inline-block;
@@ -127,18 +174,10 @@
             }
         }
 
-        .description {
-            grid-column: 5/9;
-            padding: 15px 30px;
-            color: white;
-            font-size: 18px;
-
-        }
-
-
         .info-container{
-
-            grid-column: 10/13;
+            grid-row: 1/2;
+            grid-column: 10/12;
+            align-self: end;
 
             .info-item{
                 color: #ffffff;

@@ -1,8 +1,10 @@
 <template>
     <div class="student-container">
         <transition name="fade">
-            <p v-show="filtered.length > 0 && filtered.length !==12" class="resultsCounter">Wyników: {{filtered.length}}</p>
-            <p v-show="filtered.length >= 12" class="resultsCounter">Wyników: Za dużo! Bądź dokładniejszy</p>
+            <p v-show="filtered.length > 0" class="resultsCounter">
+                Wyników: {{filtered.length !== 12 ? filtered.length : 'za dużo... bądź dokładniejszy!'}}
+            </p>
+
 
         </transition>
 
@@ -53,7 +55,6 @@
                     return this.axios.get('http://localhost:3000/students/' + this.searchValue +'/12')
                         .then(res => {
                             this.st = res.data.students
-                            console.log(res)
                         })
                         .catch(err => console.log(err))
 

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="form">
             <h1>Logowanie</h1>
-            <InPut placeholder="Nazwa Użytkownika" class="search" @input="username = $event"  :height="23"/>
-            <InPut placeholder="Hasło" type="password" class="search" @input="password = $event"  :height="23"
+            <InPut placeholder="Nazwa Użytkownika" class="search" @input="username = $event" :height="23"/>
+            <InPut placeholder="Hasło" type="password" class="search" @input="password = $event" :height="23"
                    @keydown.enter.native="login"/>
             <Icon name="arrow-right" scale="2" @click.native="login" class="arrow"/>
 
@@ -41,7 +41,23 @@
                 })
                     .then(res =>{
                         if(res.data.logged){
-                            this.$router.push('/')
+
+                            this.axios.get('http://localhost:3000/profiles/' + this.username)
+                                .then(res => {
+
+                                    //Fill the store with user info to make it global
+                                    this.$store.dispatch('fill', {
+                                        username: res.data[0].student.username,
+                                        name: res.data[0].student.name,
+                                        surname: res.data[0].student.surname,
+                                        description: res.data[0].description,
+                                        contactEmail: res.data[0].contactEmail,
+                                        phone: res.data[0].phone,
+                                        facebook: res.data[0].facebook
+                                    })
+                                    this.$router.push(`/student/${this.username}`)
+                                })
+                                .catch(err => console.log(err))
                         }
                     })
                     .catch(err =>{
@@ -75,7 +91,7 @@
                 color: #000000;
             }
 
-            .search{
+            .search {
                 width: 100%;
             }
 
@@ -101,21 +117,21 @@
         }
     }
 
-
     @media only screen and (max-width: $mobile) {
-        .container{
-            .form{
+        .container {
+            .form {
                 width: 90%;
             }
         }
 
     }
 
-
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
         opacity: 0;
     }
 </style>
