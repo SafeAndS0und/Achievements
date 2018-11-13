@@ -14,9 +14,12 @@ export default new Router({
         },
 
         {
-          path: '/error',
-          name: 'error',
-          component: () => import('./views/Error.vue')
+            path: '/error',
+            name: 'error',
+            component: () => import('./views/Error.vue'),
+            meta: {
+                layout: 'home'
+            }
         },
         {
             path: '/',
@@ -43,9 +46,9 @@ export default new Router({
             component: () => import('./views/SingleStudent.vue'),
         },
         {
-          path: '/student/:id/edit',
-          name: 'edit',
-          component: () => import('./views/Edit.vue')
+            path: '/student/:id/edit',
+            name: 'edit',
+            component: () => import('./views/Edit.vue')
         },
         {
             path: '/join',
@@ -53,9 +56,9 @@ export default new Router({
             component: () => import('./views/Join.vue')
         },
         {
-          path: '/login',
-          name: 'login',
-          component: () => import('./views/Login.vue')
+            path: '/login',
+            name: 'login',
+            component: () => import('./views/Login.vue')
         },
         {
             path: '/teacher',

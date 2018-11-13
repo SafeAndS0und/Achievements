@@ -33,7 +33,7 @@
             align-self: center;
 
             h1 {
-                color: #c91b15;
+                color: #941510;
                 font-weight: lighter;
                 font-size: 40px;
                 text-align: center;

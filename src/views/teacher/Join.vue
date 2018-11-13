@@ -32,7 +32,7 @@
         methods: {
             register(){
                 this.errorMsg = ''
-                this.axios.post('http://localhost:3000/teacher/register', {
+                this.axios.post('http://localhost:3000/teachers/register', {
                     username: this.username,
                     password: this.password,
                     name: this.name,

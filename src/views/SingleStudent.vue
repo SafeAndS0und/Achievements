@@ -98,8 +98,8 @@
     @import '../assets/css/variables.scss';
 
     .hero {
-        margin-top: 140px;
-        height: 280px;
+        margin-top: 120px;
+        height: 320px;
         width: 100%;
         background-image: linear-gradient(to right, #0a5ab1, #0c62bf, #0e69ce, #1171dc, #1379eb);
         display: grid;
@@ -193,7 +193,7 @@
         font-size: 36px;
         font-weight: lighter;
         letter-spacing: 4px;
-        margin-top: 80px;
+        margin-top: 150px;
 
     }
 
