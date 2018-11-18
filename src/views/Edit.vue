@@ -44,11 +44,17 @@
         },
         methods: {
             save(){
-                this.axios.patch('profiles/' + this.$route.params.id, {
-                    description: this.description,
-                    phone: this.phone,
-                    contactEmail: this.contactEmail,
-                    facebook: this.facebook
+                // Request with token in header
+                this.axios({
+                    url: 'profiles/' + this.$route.params.id,
+                    method: 'patch',
+                    // headers: {"Authorization": this.$store.state.currentUser.token},
+                    data: {
+                        description: this.description,
+                        phone: this.phone,
+                        contactEmail: this.contactEmail,
+                        facebook: this.facebook
+                    }
                 })
                     .then(res =>{
                         // Update the store
@@ -58,14 +64,15 @@
                             phone: this.phone,
                             facebook: this.facebook
                         })
-                        this.saved = true
+                            .then(() => this.saved = true)
+
                     })
                     .catch(err => console.log(err.response))
             },
 
             remove(){
                 this.axios.delete('students/' + this.$store.state.currentUser.username)
-                    .then(() => {
+                    .then(() =>{
                         this.$router.push('/')
                     })
                     .catch(err => console.log(err))
@@ -115,7 +122,7 @@
             padding: 8px;
         }
 
-        .remove{
+        .remove {
             justify-self: center;
             margin-bottom: 40px;
         }

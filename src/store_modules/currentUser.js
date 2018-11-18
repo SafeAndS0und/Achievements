@@ -1,3 +1,5 @@
+import axiosInstance from '../assets/js/axiosInstance'
+
 export default {
     state: {
         username: '',
@@ -9,12 +11,29 @@ export default {
         facebook: '',
         token: '',
         isTeacher: ''
+
+    },
+    getters: {
+        authenticated: state => !!state.token
     },
     mutations: {
+        fillJWTAfterRefresh(state, payload){
+            state.token = payload.token
+            state.username = payload.username
+            state.isTeacher = payload.isTeacher
+        },
         fillJWT(state, payload){
             state.token = payload.token
             state.username = payload.username
             state.isTeacher = payload.isTeacher
+
+            //Add the data to localstorage to keep it after refreshing the page
+            localStorage.setItem('token', state.token)
+            localStorage.setItem('username', state.username)
+            localStorage.setItem('isTeacher', state.isTeacher)
+
+            //change the default header for authorization on backend
+            axiosInstance.defaults.headers.common['Authorization'] = state.token
         },
         fill(state, payload){
             state.name = payload.name
@@ -40,6 +59,9 @@ export default {
         },
         fillJWT({commit}, payload){
             commit('fillJWT', payload)
+        },
+        fillJWTAfterRefresh({commit}, payload){
+            commit('fillJWTAfterRefresh', payload)
         },
     }
 }

@@ -2,26 +2,27 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 import home from './layouts/home.vue'
 import defaultL from  './layouts/default.vue'
 import teacher from  './layouts/teacher.vue'
 import Icon from 'vue-awesome/icons'
+import axiosInstance from './assets/js/axiosInstance'
 
-//Globalne przypisanie layoutów
+// Fill token after refreshing the page
+store.dispatch('fillJWTAfterRefresh', {
+    token: localStorage.getItem('token'),
+    username: localStorage.getItem('username'),
+    isTeacher: localStorage.getItem('isTeacher')
+})
+
+
+//Layouts must be assigned globally
 Vue.component('home-layout', home)
 Vue.component('default-layout', defaultL)
 Vue.component('teacher-layout', teacher)
 
-
-//utworzenie instancji axiosa
-const instanceAxios = axios.create({
-    baseURL: 'http://localhost:3000/'
-})
-
-//prototype oznacza ze możemy potem używać globalnie
-Vue.prototype.axios = instanceAxios
-
+//Prototype means we can use it globally
+Vue.prototype.axios = axiosInstance
 
 Vue.component('icon', Icon)
 

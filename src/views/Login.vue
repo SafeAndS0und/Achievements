@@ -61,7 +61,8 @@
                                         phone: res.data[0].phone,
                                         facebook: res.data[0].facebook
                                     })
-                                    this.$router.push(`/student/${this.username}`)
+                                        .then(() => this.$router.push(`/student/${this.username}`))
+
                                 })
                                 .catch(err => console.log(err))
                         }

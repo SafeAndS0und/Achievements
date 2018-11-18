@@ -1,7 +1,8 @@
 <template>
     <div>
         <section class="hero">
-            <Icon name="edit" scale="2" class="edit" @click.native="$router.push(`/student/${student.username}/edit`)"/>
+            <Icon name="edit" scale="2" class="edit" v-if="owner"
+                  @click.native="$router.push(`/student/${student.username}/edit`)"/>
 
             <div class="header">
                 <h1>{{student.username}}</h1>
@@ -78,6 +79,11 @@
                 ],
                 student: {}
 
+            }
+        },
+        computed:{
+            owner(){
+                return this.$store.getters.authenticated && this.$store.state.currentUser.username === this.$route.params.id
             }
         },
         created(){
