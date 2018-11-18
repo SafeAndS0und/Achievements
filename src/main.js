@@ -7,13 +7,9 @@ import defaultL from  './layouts/default.vue'
 import teacher from  './layouts/teacher.vue'
 import Icon from 'vue-awesome/icons'
 import axiosInstance from './assets/js/axiosInstance'
+import bringBackUserData from './assets/js/onPageRefresh'
 
-// Fill token after refreshing the page
-store.dispatch('fillJWTAfterRefresh', {
-    token: localStorage.getItem('token'),
-    username: localStorage.getItem('username'),
-    isTeacher: localStorage.getItem('isTeacher')
-})
+bringBackUserData()
 
 
 //Layouts must be assigned globally

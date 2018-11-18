@@ -33,14 +33,29 @@
 
         },
         data(){
+            //TODO: After refresh it does not update, even though the store is updated... Computed are also making problems
             return {
+                saved: false,
                 description: this.$store.state.currentUser.description,
                 phone: this.$store.state.currentUser.phone,
                 contactEmail: this.$store.state.currentUser.contactEmail,
-                facebook: this.$store.state.currentUser.facebook,
+                facebook: this.$store.state.currentUser.facebook
 
-                saved: false
             }
+        },
+        computed: {
+            // description(){
+            //     return this.$store.state.currentUser.description
+            // },
+            // phone(){
+            //     return this.$store.state.currentUser.phone
+            // },
+            // contactEmail(){
+            //     return this.$store.state.currentUser.contactEmail
+            // },
+            // facebook(){
+            //     return this.$store.state.currentUser.facebook
+            // }
         },
         methods: {
             save(){
@@ -78,12 +93,6 @@
                     .catch(err => console.log(err))
             }
         },
-        created(){
-            //dodatkowa walidacja
-            if(!this.$store.state.currentUser.username) this.$router.push('/error')
-
-            if(this.$route.params.id !== this.$store.state.currentUser.username) this.$router.push('/error')
-        }
     }
 </script>
 

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import store from './store'
 
 Vue.use(Router)
 
@@ -48,7 +49,7 @@ export default new Router({
         {
             path: '/student/:id/edit',
             name: 'edit',
-            component: () => import('./views/Edit.vue')
+            component: () => import('./views/Edit.vue'),
         },
         {
             path: '/join',
@@ -58,7 +59,13 @@ export default new Router({
         {
             path: '/login',
             name: 'login',
-            component: () => import('./views/Login.vue')
+            component: () => import('./views/Login.vue'),
+            //TODO: extract these functions into another file
+            beforeEnter: (to, from, next) => {
+                if(store.getters.authenticated){
+                    next('/')
+                }
+            }
         },
         {
             path: '/teacher',
