@@ -44,7 +44,7 @@
         },
         methods: {
             save(){
-                this.axios.patch('http://localhost:3000/profiles/' + this.$route.params.id, {
+                this.axios.patch('profiles/' + this.$route.params.id, {
                     description: this.description,
                     phone: this.phone,
                     contactEmail: this.contactEmail,
@@ -64,7 +64,7 @@
             },
 
             remove(){
-                this.axios.delete('http://localhost:3000/students/' + this.$store.state.currentUser.username)
+                this.axios.delete('students/' + this.$store.state.currentUser.username)
                     .then(() => {
                         this.$router.push('/')
                     })

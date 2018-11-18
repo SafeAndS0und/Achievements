@@ -35,19 +35,25 @@
         methods: {
             login(){
                 this.errorMsg = ''
-                this.axios.post('http://localhost:3000/students/login', {
+
+                this.axios.post('students/login', {
                     username: this.username,
                     password: this.password
                 })
                     .then(res =>{
                         if(res.data.logged){
+                            // The first request is done, we've got basic data and token, fill the store
+                            this.$store.dispatch('fillJWT', {
+                                username: res.data.username,
+                                token: res.data.token,
+                                isTeacher: res.data.isTeacher
+                            })
 
-                            this.axios.get('http://localhost:3000/profiles/' + this.username)
+
+                            this.axios.get('profiles/' + this.username)
                                 .then(res => {
-
                                     //Fill the store with user info to make it global
                                     this.$store.dispatch('fill', {
-                                        username: res.data[0].student.username,
                                         name: res.data[0].student.name,
                                         surname: res.data[0].student.surname,
                                         description: res.data[0].description,

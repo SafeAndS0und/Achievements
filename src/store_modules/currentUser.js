@@ -1,4 +1,3 @@
-
 export default {
     state: {
         username: '',
@@ -8,10 +7,16 @@ export default {
         contactEmail: '',
         phone: '',
         facebook: '',
+        token: '',
+        isTeacher: ''
     },
     mutations: {
-        fill(state, payload){
+        fillJWT(state, payload){
+            state.token = payload.token
             state.username = payload.username
+            state.isTeacher = payload.isTeacher
+        },
+        fill(state, payload){
             state.name = payload.name
             state.surname = payload.surname
             state.description = payload.description
@@ -32,6 +37,9 @@ export default {
         },
         updateTheProfile({commit}, payload){
             commit('updateTheProfile', payload)
-        }
+        },
+        fillJWT({commit}, payload){
+            commit('fillJWT', payload)
+        },
     }
 }

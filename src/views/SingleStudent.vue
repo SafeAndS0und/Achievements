@@ -81,7 +81,7 @@
             }
         },
         created(){
-            this.axios.get('http://localhost:3000/profiles/' + this.$route.params.id)
+            this.axios.get('profiles/' + this.$route.params.id)
                 .then(res => {
                     this.student = res.data[0].student
                     this.student.description = res.data[0].description

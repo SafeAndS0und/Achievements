@@ -13,8 +13,14 @@ Vue.component('home-layout', home)
 Vue.component('default-layout', defaultL)
 Vue.component('teacher-layout', teacher)
 
+
+//utworzenie instancji axiosa
+const instanceAxios = axios.create({
+    baseURL: 'http://localhost:3000/'
+})
+
 //prototype oznacza ze możemy potem używać globalnie
-Vue.prototype.axios = axios
+Vue.prototype.axios = instanceAxios
 
 
 Vue.component('icon', Icon)

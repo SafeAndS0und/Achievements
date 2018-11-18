@@ -45,14 +45,7 @@
             showStudents(){
                 this.$router.push({name: 'student'})
             },
-            fetchData(){
-                // this.axios.get('https://jsonplaceholder.typicode.com/todos/1')
-                //     .then(res => console.log(res.data))
-            }
-        },
-        created(){
-            this.fetchData()
-        },
+        }
 
 
     }

@@ -26,7 +26,7 @@
         methods:{
             login(){
                 this.errorMsg = ''
-                this.axios.post('http://localhost:3000/teachers/login', {
+                this.axios.post('teachers/login', {
                     username: this.username,
                     password: this.password
                 })

@@ -85,7 +85,7 @@
             },
             register(){
                 this.errorMsg = ''
-                return this.axios.post('http://localhost:3000/students/register', {
+                return this.axios.post('students/register', {
                     username: this.student.username,
                     email: this.student.email,
                     password: this.student.password,
