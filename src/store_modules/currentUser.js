@@ -50,15 +50,8 @@ export default {
             state.facebook = payload.facebook
         },
         clear(state){
-            state.token = ''
-            state.username = ''
-            state.isTeacher = ''
-            state.name = ''
-            state.surname = ''
-            state.description = ''
-            state.contactEmail = ''
-            state.phone = ''
-            state.facebook = ''
+            // Iterate over every object's key and clear its value
+            Object.keys(state).forEach(key => state[key] = '')
         }
     },
     actions: {
