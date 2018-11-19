@@ -48,6 +48,17 @@ export default {
             state.contactEmail = payload.contactEmail
             state.phone = payload.phone
             state.facebook = payload.facebook
+        },
+        clear(state){
+            state.token = ''
+            state.username = ''
+            state.isTeacher = ''
+            state.name = ''
+            state.surname = ''
+            state.description = ''
+            state.contactEmail = ''
+            state.phone = ''
+            state.facebook = ''
         }
     },
     actions: {
@@ -63,5 +74,8 @@ export default {
         fillJWTAfterRefresh({commit}, payload){
             commit('fillJWTAfterRefresh', payload)
         },
+        clear({commit}){
+            commit('clear')
+        }
     }
 }

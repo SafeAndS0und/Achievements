@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import store from './store'
+import {middlewares} from "./assets/js/routerMiddlewares";
 
 Vue.use(Router)
 
@@ -50,22 +51,20 @@ export default new Router({
             path: '/student/:id/edit',
             name: 'edit',
             component: () => import('./views/Edit.vue'),
+            beforeEnter: middlewares.isAuthenticated
         },
         {
             path: '/join',
             name: 'join',
-            component: () => import('./views/Join.vue')
+            component: () => import('./views/Join.vue'),
+            beforeEnter: middlewares.isntAuthenticated
         },
         {
             path: '/login',
             name: 'login',
             component: () => import('./views/Login.vue'),
-            //TODO: extract these functions into another file
-            beforeEnter: (to, from, next) => {
-                if(store.getters.authenticated){
-                    next('/')
-                }
-            }
+            beforeEnter: middlewares.isntAuthenticated
+
         },
         {
             path: '/teacher',
@@ -81,7 +80,8 @@ export default new Router({
                     component: () => import('./views/teacher/Login.vue'),
                     meta: {
                         layout: 'teacher'
-                    }
+                    },
+                    beforeEnter: middlewares.isntAuthenticated
                 },
                 {
                     path: 'join',
@@ -89,7 +89,8 @@ export default new Router({
                     component: () => import('./views/teacher/Join.vue'),
                     meta: {
                         layout: 'teacher'
-                    }
+                    },
+                    beforeEnter: middlewares.isntAuthenticated
                 }
             ]
         }

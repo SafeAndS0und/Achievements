@@ -7,8 +7,9 @@
             <InPut :autofocus="autofocused" @focused="showStudents" @input="searchValue = $event"
                    placeholder="Znajdź siebie lub znajomego wpisując nick" :width="width" class="search"/>
             <div class="links">
-                <router-link to="/join" class="register">Nie masz jeszcze konta?</router-link>
-                <router-link to="/login" class="login">Mam już konto</router-link>
+                <router-link to="/join" v-if="!authenticated" class="register">Nie masz jeszcze konta?</router-link>
+                <router-link to="/login" v-if="!authenticated" class="login">Mam już konto</router-link>
+                <p @click="logout" v-if="authenticated" class="register">Wyloguj się</p>
             </div>
         </section>
 
@@ -40,11 +41,22 @@
             autofocused(){
                 return this.$route.path.includes('student')
             },
+            authenticated(){
+                return this.$store.getters.authenticated
+            }
         },
         methods: {
             showStudents(){
                 this.$router.push({name: 'student'})
             },
+            logout(){
+                import('../assets/js/logout.js')
+                    .then(module =>{
+                        module.default()
+                            .then(() => this.$router.push({name: 'home'}))
+                            .catch(err => console.log(err))
+                    })
+            }
         }
 
 
@@ -92,6 +104,7 @@
                 display: block;
                 margin-top: 10px;
                 margin-bottom: 15px;
+                cursor: pointer;
 
             }
             .register:hover {
@@ -127,8 +140,6 @@
     }
 
     /* MOBILE */
-
-
 
     @media only screen and (max-width: $tablet) {
         .search-area {

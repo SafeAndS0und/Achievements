@@ -93,6 +93,10 @@
                     .catch(err => console.log(err))
             }
         },
+        created(){
+            //Additional validation
+            if(this.$route.params.id !== this.$store.state.currentUser.username) this.$router.push('/error')
+        }
     }
 </script>
 
